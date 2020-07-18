@@ -1,0 +1,135 @@
+<!--Add Employee Layout-->
+<div class="card m-3">
+    <h5 class="card-header">Enter new employee details</h5>
+
+    <div class="alert alert-danger" role="alert" *ngIf="showServerError">
+        {{serverError}}
+    </div>
+    <span style="color: red; padding-left: 20px;"><small><b>*Required field</b></small></span>
+
+    <div class="card-body" style="margin: auto; width: 90%; padding-left: 170px;">
+
+        <form [formGroup]="addEmployeeForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-row">
+                <div class="form-group col-5">
+                    <label><b>First name</b></label><span style="color: red;">*</span>
+                    <input type="text" id="firstName" formControlName="firstName" class="form-control"
+                        [ngClass]="{'is-invalid':submitted && formControl.firstName.errors}" />
+                    <div *ngIf="submitted  && formControl.firstName.errors" class="invalid-feedback">
+                        <div *ngIf="formControl.firstName.errors.required">First name is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-5">
+                    <label><b>Last name</b></label>
+                    <input type="text" id="lastName" formControlName="lastName" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-5">
+                    <label><b>Email ID</b></label><span style="color: red;">*</span>
+                    <input type="email" id="emailId" formControlName="emailId" class="form-control"
+                        [ngClass]="{'is-invalid':submitted && formControl.emailId.errors}" [pattern]="emailPattern" />
+                    <div *ngIf="submitted  && formControl.emailId.errors" class="invalid-feedback">
+                        <div *ngIf="formControl.emailId.errors.required">Email is required</div>
+                        <div *ngIf="formControl.emailId.errors?.pattern">Email must be a valid address</div>
+                    </div>
+                </div>
+                <div class="form-group col-5">
+                    <label><b>Phone number</b></label><span style="color: red;">*</span>
+                    <input type="tel" id="phoneNumber" formControlName="phoneNumber" class="form-control"
+                        [ngClass]="{'is-invalid':submitted && formControl.phoneNumber.errors}"
+                        [pattern]="phoneNumberPattern" maxlength="14"/>
+                    <div *ngIf="submitted  && formControl.phoneNumber.errors" class="invalid-feedback">
+                        <div *ngIf="formControl.phoneNumber.errors.required">Phone number is required</div>
+                        <div *ngIf="formControl.phoneNumber.errors?.pattern">Phone must be a valid number</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-5">
+                    <label><b>Date of birth</b></label><span style="color: red;">*</span>
+                    <input class="form-control" type="text" mwlFlatpickr now="today" dateFormat="d/m/Y"
+                        [allowInput]="true" formControlName="dateOfBirth"
+                        [ngClass]="{'is-invalid':submitted && formControl.dateOfBirth.errors}" />
+                    <div *ngIf="submitted  && formControl.dateOfBirth.errors" class="invalid-feedback">
+                        <div *ngIf="formControl.dateOfBirth.errors.required">Date of birth is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-5">
+                    <label><b>Gender</b></label><span style="color: red;">*</span>
+                    <select id="gender" formControlName="gender" class="form-control"
+                        [ngClass]="{'is-invalid':submitted && formControl.gender.errors}">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Others</option>
+                    </select>
+                    <div *ngIf="submitted  && formControl.gender.errors" class="invalid-feedback">
+                        <div *ngIf="formControl.gender.errors.required">Gender is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="width: 83%;">
+                <label><b>Designation</b></label><span style="color: red;">*</span>
+                <input type="text" id="designation" formControlName="designation" class="form-control"
+                    [ngClass]="{'is-invalid':submitted && formControl.designation.errors}" />
+                <div *ngIf="submitted  && formControl.designation.errors" class="invalid-feedback">
+                    <div *ngIf="formControl.designation.errors.required">Designation is required</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-5">
+                    <label><b>Marital status</b></label><span style="color: red;">*</span>
+                    <select id="maritalStatus" formControlName="maritalStatus" class="form-control"
+                        [ngClass]="{'is-invalid':submitted && formControl.maritalStatus.errors}">
+                        <option>Single</option>
+                        <option>Married</option>
+                        <option>Divorced</option>
+                        <option>Widowed</option>
+                    </select>
+                    <div *ngIf="submitted  && formControl.maritalStatus.errors" class="invalid-feedback">
+                        <div *ngIf="formControl.maritalStatus.errors.required">Marital status is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-5">
+                    <label><b>Blood group</b></label><span style="color: red;">*</span>
+                    <select id="bloodGroup" formControlName="bloodGroup" class="form-control"
+                        [ngClass]="{'is-invalid':submitted && formControl.bloodGroup.errors}">
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                    </select>
+                    <div *ngIf="submitted  && formControl.bloodGroup.errors" class="invalid-feedback">
+                        <div *ngIf="formControl.bloodGroup.errors.required">Blood group is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Address text area which includes Number, Street name, City, State, Zip code  -->
+            <div class="form-group" style="width: 83%;">
+                <label><b>Address</b></label><span style="color: red;">*</span>
+                <textarea id="address" formControlName="address" class="form-control"
+                    [ngClass]="{'is-invalid':submitted && formControl.address.errors}"></textarea>
+                <div *ngIf="submitted  && formControl.address.errors" class="invalid-feedback">
+                    <div *ngIf="formControl.address.errors.required">Address is required</div>
+                </div>
+            </div>
+
+            <div class="text-center" style="padding-right: 170px;">
+                <button class="btn btn-primary mr-1">Add</button>
+                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+            </div>
+
+            <br><br>
+        </form>
+    </div>
+</div>

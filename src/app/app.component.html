@@ -1,0 +1,16 @@
+<!-- Main Html component -- Employment management system -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <a routerLink="" class="btn btn-success btn-sm" routerLinkActive="active" role="button" *ngIf="showViewBtn">Home</a>
+    <label style="text-align: center; color:#ffffff; display:inline-block; width: 100%;">{{pageTitle}}</label>
+    <a routerLink="add" class="btn btn-success btn-sm ml-auto mr-1" routerLinkActive="active" role="button"
+        *ngIf="showAddBtn">Add</a>
+</nav>
+<br /><br /><br />
+<router-outlet></router-outlet>
+<footer class="footer fixed-bottom">
+    <br>
+    <div class="container">
+        <label style="text-align: center; color:#ffffff; display:inline-block; width: 100%;">All Rights Reserved 2020
+            @AstraZeneca</label>
+    </div>
+</footer>
